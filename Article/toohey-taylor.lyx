@@ -407,7 +407,7 @@ repos <- data.frame(Host, Projects, Users, BackEnd)
 \begin_layout Plain Layout
 
 print(xtable(repos, type="latex", digits=0, caption="Total usage statistics
- (December 2013)"), include.rownames=FALSE)
+ (December 2013)"), include.rownames=FALSE, caption.placement="top")
 \end_layout
 
 \begin_layout Plain Layout
