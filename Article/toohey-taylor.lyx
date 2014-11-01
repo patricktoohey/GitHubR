@@ -909,8 +909,17 @@ repos.r <- function(){
 
 \begin_layout Plain Layout
 
-  repos <- rbind(repos, do.call('rbind', lapply(1:5, function(i) page.data(github.a
-pi.search(page=i)))))
+  repos <- rbind(repos, do.call('rbind', lapply(1:5, function(i){
+\end_layout
+
+\begin_layout Plain Layout
+
+             page.data(github.api.search(page=i))
+\end_layout
+
+\begin_layout Plain Layout
+
+           })))
 \end_layout
 
 \begin_layout Plain Layout
@@ -920,8 +929,17 @@ pi.search(page=i)))))
 
 \begin_layout Plain Layout
 
-  repos <- rbind(repos, do.call('rbind', lapply(6:10, function(i) page.data(github.
-api.search(page=i)))))
+  repos <- rbind(repos, do.call('rbind', lapply(6:10, function(i){
+\end_layout
+
+\begin_layout Plain Layout
+
+             page.data(github.api.search(page=i))
+\end_layout
+
+\begin_layout Plain Layout
+
+           })))
 \end_layout
 
 \begin_layout Plain Layout
@@ -3136,7 +3154,17 @@ $login)
 \begin_layout Plain Layout
 
 commits.ggplot <- do.call('rbind', lapply(1:length(authors), function(i, author=au
-thors[[i]]) author.totals(i, author)))
+thors[[i]]) {
+\end_layout
+
+\begin_layout Plain Layout
+
+                            author.totals(i, author)
+\end_layout
+
+\begin_layout Plain Layout
+
+                         }))
 \end_layout
 
 \begin_layout Plain Layout
