@@ -9,3 +9,6 @@
 
 # RStudio files
 .Rproj.user/
+
+# Lyx Temp Files
+.lyx~
