@@ -109,17 +109,17 @@ by Patrick Toohey and Roger S.
 \begin_layout Abstract
 Since its inception in 2008, GitHub has come to house over 1000 R-language
  projects, including over 180 CRAN packages.
- In this article we investigate the social structure of the R community
- on GitHub using the GitHub API: an open web programming interface to GitHub's
- repositories and metadata.
+ In this article we present the social structure of the R community on GitHub
+ using the GitHub API: an open web programming interface to GitHub's repositorie
+s and metadata.
  This generic API includes search facilities that can enumerate repositories
  associated with specific programming languages.
- This interface will allow us to investigate the landscape of R development
+ The interface allowed us to investigate the landscape of R development
  on GitHub and identify key projects with substantial social impact on the
  community.
- Having identified projects of interest, we can use additional facilities
- of the API to harvest related development activity data, which we can then
- visualize to better understand the scope of collaboration within the associated
+ Having identified projects of interest, we used additional facilities of
+ the API to harvest related development activity data, which facilitated
+ visualizations demonstrating the scope of collaboration within individual
  repositories.
 \end_layout
 
