@@ -12,6 +12,7 @@
 
 # Lyx Temp Files
 *.lyx~
+*.lyx#
 Article/figure/
 Article/*.svg
 Article/*.csv
