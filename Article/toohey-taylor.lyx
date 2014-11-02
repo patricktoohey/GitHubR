@@ -1689,7 +1689,7 @@ eaks=c(1,2,3,4,5,6,7,8,9,10))
 
 \begin_layout Plain Layout
 
-ggsave("languages_forks.svg")
+ggsave("../Figures/languages_forks.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1878,7 +1878,7 @@ eaks=c(1,2,3,4,5,6,7,8,9,10))
 
 \begin_layout Plain Layout
 
-ggsave("languages_watchers.svg")
+ggsave("../Figures/languages_watchers.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2110,7 +2110,7 @@ r + label.name + label.owner + label.watched
 
 \begin_layout Plain Layout
 
-ggsave("repos_forked.svg")
+ggsave("../Figures/repos_forked.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2239,7 +2239,7 @@ r + labels + owners + label.forks
 
 \begin_layout Plain Layout
 
-ggsave("repos_watched.svg")
+ggsave("../Figures/repos_watched.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2392,7 +2392,7 @@ plot.history + theme(axis.text.x=element_text(size=7, angle=0)) + xlab("Date
 
 \begin_layout Plain Layout
 
-ggsave("history.svg", width=6, height=4)
+ggsave("../Figures/history.svg", width=6, height=4)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2541,7 +2541,7 @@ write.csv(github.cran, "github_cran.csv")
 
 \begin_layout Plain Layout
 
-ggsave("cran_repos.svg")
+ggsave("../Figures/cran_repos.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2636,7 +2636,7 @@ social + ylab("Forks") + xlab("Watchers")
 
 \begin_layout Plain Layout
 
-ggsave("cran_density.svg")
+ggsave("../Figures/cran_density.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2771,7 +2771,7 @@ narrow <- element_text(family=font)
 
 \begin_layout Plain Layout
 
-ggsave("r_activity.svg")
+ggsave("../Figures/r_activity.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2958,7 +2958,7 @@ narrow <- element_text(family=font)
 
 \begin_layout Plain Layout
 
-ggsave("r_activity.svg")
+ggsave("../Figures/r_activity.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3308,7 +3308,7 @@ p + ylab("Commits (log scale)") + xlab("Project Weeks")
 
 \begin_layout Plain Layout
 
-ggsave("ggplot_line_all.svg")
+ggsave("../Figures/ggplot_line_all.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3380,7 +3380,7 @@ l + facet_wrap(~author, ncol=2) + theme(strip.text.x=element_text(family=font,
 
 \begin_layout Plain Layout
 
-ggsave("ggplot_line_authors.svg")
+ggsave("../Figures/ggplot_line_authors.svg")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3595,7 +3595,7 @@ p
 
 \begin_layout Plain Layout
 
-ggsave("github_ggplot2.svg")
+ggsave("../Figures/github_ggplot2.svg")
 \end_layout
 
 \begin_layout Plain Layout
