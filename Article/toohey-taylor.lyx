@@ -1453,7 +1453,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<frequently-forked, echo=FALSE, fig.height=3, message=FALSE>>=
+<<frequently-forked, echo=FALSE, warning=FALSE, fig.height=3, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1464,6 +1464,21 @@ library(plyr)
 \begin_layout Plain Layout
 
 library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(grid) 
+\end_layout
+
+\begin_layout Plain Layout
+
+library(reshape2)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(scales)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1719,167 +1734,6 @@ ggsave("../Figures/repos_watched.svg")
 
 \begin_layout Plain Layout
 GitHub R Repository Watchers
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The projects with the highest watch counts continue to grow, with the growth
- of the top 3 projects shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:GitHub-R-Repository"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<watched-history, echo=FALSE, warning=FALSE, fig.width=6, fig.height=4, message=F
-ALSE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-library(ggplot2) 
-\end_layout
-
-\begin_layout Plain Layout
-
-library(grid) 
-\end_layout
-
-\begin_layout Plain Layout
-
-library(reshape2)
-\end_layout
-
-\begin_layout Plain Layout
-
-library(scales)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-year.pattern <-"%Y-%m-%d" 
-\end_layout
-
-\begin_layout Plain Layout
-
-select.color <- "#384f7a"
-\end_layout
-
-\begin_layout Plain Layout
-
-repos.github <- transform(github.history, Collected = as.Date(Collected, year.patter
-n)) 
-\end_layout
-
-\begin_layout Plain Layout
-
-blub <- subset(repos.github, !Collected %in% as.Date(c("2013-10-08", "2013-12-12",
- "2013-12-13", "2013-12-21", "2014-01-10", "2014-01-19", "2014-01-25", "2014-02-
-09"), year.pattern)) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- ggplot(subset(blub, Name %in% head(repos.github, 3L)$Name))
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- plot.history + geom_line(aes(x=as.Date(Collected, year.pattern),
- y=Watchers), size=0.5, color=select.color)
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- plot.history + geom_point(aes(x=as.Date(Collected, year.pattern),
- y=Watchers), size=2, color=select.color)
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- plot.history + geom_point(aes(x=as.Date(Collected, year.pattern),
- y=Watchers), size=1, color="white") 
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- plot.history + facet_wrap(~Name,ncol=3)
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history <- plot.history + scale_x_date(breaks = date_breaks("months"),
- labels = date_format("%b"))
-\end_layout
-
-\begin_layout Plain Layout
-
-plot.history + theme(axis.text.x=element_text(size=7, angle=0)) + xlab("Date
- of Sample")
-\end_layout
-
-\begin_layout Plain Layout
-
-ggsave("../Figures/history.svg", width=6, height=4)
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Top 3 GitHub R repositories by watcher count between November 2013 and March
- 2014
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:GitHub-R-Repository"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
