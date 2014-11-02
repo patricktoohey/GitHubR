@@ -805,62 +805,13 @@ print(xtable(head(page1.r), type="latex", digits=0, caption="Sample GitHub
 
 \end_layout
 
-\begin_layout Subsection
-GitHub API Limitations
-\end_layout
-
-\begin_layout Standard
-In addition to the limited scope induced by private repositories, the GitHub
- API limits access to the underlying data via 
-\begin_inset Quotes eld
-\end_inset
-
-rate limiting.
-\begin_inset Quotes erd
-\end_inset
-
- In order to prevent abuse of its public API, the responding servers limit
- the number of queries that will be accepted from each unique client.
- This filtering is implemented on a timed-basis, restricting the number
- of queries that can be executed in a given period of time.
- The actual limits vary by the interface used (see API documentation for
- details).
- 
-\end_layout
-
-\begin_layout Standard
-Registered GitHub users can utilize an elevated rate limit by submitting
- credentials with their query.
- The credentials may be provided in the form of a username/password combination
- or with an application token created within the user's GitHub profile.
- 
-\end_layout
-
-\begin_layout Standard
-In addition to the rate limits, the GitHub API will return no more than
- 10 pages of 100 entries for basic search queries.
- The maximum number of entries returned can be manipulated slightly by requestin
-g different combinations of pages and entries (20 pages of 50 entries, etc.);
- however, the number of entries retrieved for any given programming language
- is limited to approximately 1000 regardless of the combination of pages
- and entries selected.
- The values returned will be ordered, by default, by watchers.
- Therefore, less frequently watched repositories may exist, but may be missing
- from our data set.
-\end_layout
-
-\begin_layout Standard
-Due to these limitations, we will need to collect our data in two separate
- phases, collecting 5 pages per phase with a 1 minute delay between them.
-\end_layout
-
 \begin_layout Standard
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-<<automated, tidy=TRUE>>=
+<<automated, echo=FALSE, tidy=TRUE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -960,15 +911,6 @@ repos.r <- function(){
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Finally, manual inspection of the results from several queries identified
- a number of entries related to the rarely encountered programming language
- Rebol.
- Utilizing the identical .r file extension, a limited number of Rebol files
- may creep into the search results of our R-language query and provide a
- slight skew to our numbers.
 \end_layout
 
 \begin_layout Subsection
