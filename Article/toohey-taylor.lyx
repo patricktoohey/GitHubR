@@ -1168,7 +1168,8 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-  url.data <- "https://raw.githubusercontent.com/bahbah2e/Datasets/master/repos.csv"
+  url.data <- "https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data/
+/repos.csv"
 \end_layout
 
 \begin_layout Plain Layout
@@ -1660,8 +1661,8 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-  url.data <- "https://raw.githubusercontent.com/bahbah2e/Datasets/master/forks_pol
-yglot.csv"
+  url.data <- "https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data/
+/forks_polyglot.csv"
 \end_layout
 
 \begin_layout Plain Layout
@@ -1849,8 +1850,8 @@ write.csv(repositories, "watcher_polyglot.csv")
 
 \begin_layout Plain Layout
 
-  url.data <- "https://raw.githubusercontent.com/bahbah2e/Datasets/master/watcher_p
-olyglot.csv"
+  url.data <- "https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data/
+/watcher_polyglot.csv"
 \end_layout
 
 \begin_layout Plain Layout
@@ -3272,8 +3273,8 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-  url.data <- "https://raw.githubusercontent.com/bahbah2e/Datasets/master/commits_g
-gplot.csv"
+  url.data <- "https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data/
+commits_ggplot.csv"
 \end_layout
 
 \begin_layout Plain Layout
