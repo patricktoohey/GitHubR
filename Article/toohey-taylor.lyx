@@ -1327,7 +1327,7 @@ status open
 
 \begin_layout Plain Layout
 
-write.csv(future.cran, "future_cran.csv")
+write.csv(future.cran, "../Data/future_cran.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1615,7 +1615,7 @@ repositories <- rbind(page1.forks.java, page1.forks.python, page1.forks.r)
 
 \begin_layout Plain Layout
 
-write.csv(repositories, "forks_polyglot.csv")
+write.csv(repositories, "../Data/forks_polyglot.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1638,7 +1638,7 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-  write.csv(repositories, "forks_polyglot.csv")
+  write.csv(repositories, "../Data/forks_polyglot.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1804,7 +1804,7 @@ repositories <- rbind(page1.watchers.r, page1.java.watchers, page1.python.watche
 
 \begin_layout Plain Layout
 
-write.csv(repositories, "watcher_polyglot.csv")
+write.csv(repositories, "../Data/watcher_polyglot.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1827,7 +1827,7 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-write.csv(repositories, "watcher_polyglot.csv")
+write.csv(repositories, "../Data/watcher_polyglot.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2472,7 +2472,7 @@ r.releases <- data.frame(date.release, version.release)
 
 \begin_layout Plain Layout
 
-write.csv(r.releases, "r_versions.csv")
+write.csv(r.releases, "../Data/r_versions.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2537,7 +2537,7 @@ crans
 
 \begin_layout Plain Layout
 
-write.csv(github.cran, "github_cran.csv")
+write.csv(github.cran, "../Data/github_cran.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3250,7 +3250,7 @@ if (data.live) {
 
 \begin_layout Plain Layout
 
-  write.csv(commits.ggplot, "commits_ggplot.csv")
+  write.csv(commits.ggplot, "../Data/commits_ggplot.csv")
 \end_layout
 
 \begin_layout Plain Layout
