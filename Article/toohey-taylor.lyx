@@ -2611,12 +2611,12 @@ status open
 
 \begin_layout Plain Layout
 
-social <- ggplot(github.cran, aes(x=log(Watchers+1), y=log(Forks+1)))
+social <- ggplot(github.cran, aes(x=log2(Watchers+1), y=log2(Forks+1)))
 \end_layout
 
 \begin_layout Plain Layout
 
-social <- social + geom_point(alpha=0.5) + facet_grid(.~Package)
+social <- social + geom_point(alpha=0.5, color="#384f7a") + facet_grid(.~Package)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2626,7 +2626,7 @@ social <- social + xlim(-1,7) + ylim(-1,6.2) + theme(legend.position="none")
 
 \begin_layout Plain Layout
 
-social <- social + geom_density2d()
+social <- social + geom_density2d(colour="blue", bins=5)
 \end_layout
 
 \begin_layout Plain Layout
