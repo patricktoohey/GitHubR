@@ -227,56 +227,6 @@ key "Meyerovich:2012:SDR:2414721.2414724"
 \end_layout
 
 \begin_layout Subsection
-R-Forge
-\end_layout
-
-\begin_layout Standard
-R-Forge (
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-url{http://r-forge.r-project.org/}
-\end_layout
-
-\end_inset
-
-), introduced in 2007, is an R community alternative to GitHub, which went
- online a year later in 2008.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "RJournal_2009-1_Theussl+Zeileis"
-
-\end_inset
-
- provide details regarding the purpose of R-Forge and discuss the merits
- of such a system within communities like R.
- Similar to GitHub, R-Forge is a web hosted version control system.
- However, R-Forge is based on a traditional centralized version control
- system - Subversion (SVN) - so it does not benefit from the advantages
- of the distributed model, discussed earlier.
- R-Forge contains 1,634 projects and 7,113 users 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "aboutRForge"
-
-\end_inset
-
-.
- A key advantage of R-Forge is its sole focus on R.
- R-Forge includes collections of similar projects, cataloged by domain (bioinfor
-matics, economics, visualization, etc.), all focused on R, and presented
- in a format which is easy to browse and discover - a process which is not
- so easily achieved in GitHub.
- Despite the advantages provided by GitHub, a developer looking to create
- a new project, may still wish to consider R-Forge as a host environment.
-\end_layout
-
-\begin_layout Subsection
 GitHub
 \end_layout
 
@@ -360,9 +310,39 @@ pkg{devtools}
 \end_layout
 
 \begin_layout Standard
-While there are other version control hosts (e.g., SorceForge, BitBucket,
- Google Code, etc.) we will focus on GitHub due to its dominance in the domain
- and publicly available API, which will be discussed shortly.
+While there are other version control hosts (e.g., SorceForge, R-Forge
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+R-Forge (
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+url{http://r-forge.r-project.org/}
+\end_layout
+
+\end_inset
+
+) is a GitHub alternative focused primarily on projects related to R development
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "RJournal_2009-1_Theussl+Zeileis"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, Google Code, etc.) we will focus on GitHub due to its dominance in the
+ domain and publicly available API, which will be discussed shortly.
 \end_layout
 
 \begin_layout Standard
