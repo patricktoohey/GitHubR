@@ -1719,8 +1719,13 @@ CRAN Subset
 Given the collection of CRAN packages collected in the web scraping task
  earlier, we have altered the Forks visualization to better highlight the
  CRAN packages existing in the data set.
- Additionally, the time axis has been updated to indicate the current version
- of R associated with the project's creation date.
+ As before, each mark represents the date the project was created, and the
+ number of project forks reported by the GitHub API.
+ The time axis demonstrates the latest R version available when the project
+ was created.
+ This visualization demonstrates the growth of R as a language, as well
+ as the increasing popularity of GitHub as a source code repository with
+ the community.
 \end_layout
 
 \begin_layout Standard
@@ -1795,7 +1800,8 @@ ter"))
 \begin_layout Plain Layout
 
 crans <- crans + theme(panel.grid.minor=element_blank(), panel.grid.major=element_li
-ne(size=0.1)) + xlab("R versions over time")
+ne(size=0.1)) + xlab("Project Creation Date Relative to R Versions" + ylab("log10
+(Forks+1)"))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1934,7 +1940,7 @@ ggsave("../Figures/cran_density.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Density Plot for CRAN and Non-CRAN Repositories (log scales)
+Density Plot for CRAN and Non-CRAN Repositories (log2 scales)
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Density-Plot-for"
@@ -2909,8 +2915,13 @@ Package and tool developers are leading the R community's continued adoption
  of traditional software engineering practices like version control, unit
  testing, build automation, and continuous integration; with version control
  providing the foundation for the later development stages.
- Developers, like those performing reproducible research, utilize the provided
- packages and tools.
+ These tools offer a closed loop, allowing a build automation system to
+ detect changes to the underlying code, which can then trigger automated
+ testing of new code.
+ The GitHub community enhances this infrastructure by connecting developers
+ and facilitating collaboration.
+ Developers - like those performing reproducible research - utilize and
+ benefit from the packages and tools provided by GitHub's R community.
  They realize the benefits of these methods, as is evident by the growth
  in the R community on GitHub.
 \end_layout
