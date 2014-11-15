@@ -218,9 +218,10 @@ key "Meyerovich:2012:SDR:2414721.2414724"
 .
  That investigation notes the rise of GitHub and its contribution to the
  decline of SourceForge as a dominant source code host.
- This note is interesting in that it indirectly cautions that, apparent
- drops in utilization of a given language, within a source code host, may
- actually be evidence of reduced utilization of the underlying host itself.
+ This note is interesting as it indirectly cautions that apparent drops
+ in utilization of a given language - specifically those maintained within
+ a particular source code host - may actually be evidence of reduced utilization
+ of the underlying host itself.
  In fact, it may be possible to determine the strength of the host by measuring
  the utilization of key languages which are unlikely to experience fluctuations
  in activity.
@@ -254,21 +255,10 @@ key "Spinellis:2012:GIT:2225055.2225246"
 \end_layout
 
 \begin_layout Standard
-While public repositories on GitHub are visible to anyone with a web browser,
- GitHub also addresses the needs of private-sector developers by providing
- private repositories for a fee.
- These repositories are visible only to the repository owners and allocated
- collaborators, and therefore our search results will not include any of
- these private repositories.
- Thus, it is important for us to be aware that the actual R community may
- be much larger than represented by our analyses.
-\end_layout
-
-\begin_layout Standard
 GitHub contains over 9.7 million projects and more than 4.7 million users
  
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "aboutGitHub"
 
 \end_inset
@@ -278,39 +268,25 @@ key "aboutGitHub"
  model contributes to its general population growth and is referenced by
  developers as a key to its success 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "McDonald:2013:PPO:2468356.2468382"
 
 \end_inset
 
 .
- Within the R community, recommendations suggest using GitHub to support
- reproducible research 
+ Additionally, within the R community, recommendations suggest using GitHub
+ to support reproducible research 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Gandrud:2013"
 
 \end_inset
 
 .
- Additional support is found in the 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-pkg{devtools}
-\end_layout
-
-\end_inset
-
- package, which provides installation of R packages directly from GitHub.
 \end_layout
 
 \begin_layout Standard
-While there are other version control hosts (e.g., SorceForge, R-Forge
+While there are other version control hosts (e.g., SourceForge, R-Forge
 \begin_inset Foot
 status open
 
@@ -331,7 +307,7 @@ url{http://r-forge.r-project.org/}
 ) is a GitHub alternative focused primarily on projects related to R development
  
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "RJournal_2009-1_Theussl+Zeileis"
 
 \end_inset
@@ -411,28 +387,13 @@ The practice of source code repository mining can be employed to gain insight
  repositories can be used to improve engineering practices associated with
  targeted projects 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Bird:2009:PPM:1590955.1591132"
 
 \end_inset
 
 .
- Alternate methods, like surveys, would be required to understand usage
- of developers that utilize such private repositories 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Meyerovich:2012:SDR:2414721.2414724"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-As noted earlier, we will be investigating the public subset of GitHub repositor
-ies using the GitHub API.
- Our focus will be on the social aspects of the R community with special
+ Our investigation targeted the social aspects of the R community with special
  focus on repository forks, watchers, and collaboration.
  Researchers have identified these areas as key metrics developers consider
  when determining the strength of a given project: 
@@ -440,6 +401,26 @@ ies using the GitHub API.
 LatexCommand citep*
 before "e.g., "
 key "Choi:2013:HOS:2441955.2441989,Dabbish:2012:SCG:2145204.2145396,McDonald:2013:PPO:2468356.2468382"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While public repositories on GitHub are visible to anyone with a web browser,
+ GitHub also addresses the needs of private-sector developers by offering
+ private repositories, which are visible only to the repository owners and
+ allocated collaborators.
+ Accordingly, our search results do not include any code associated with
+ private repositories.
+ Thus, it is important for us to be aware that the actual R community on
+ GitHub may be larger than our analysis suggests.
+ Alternate methods, like surveys, would be required to understand usage
+ of developers that utilize GitHub's private repositories 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Meyerovich:2012:SDR:2414721.2414724"
 
 \end_inset
 
@@ -463,17 +444,17 @@ http://developer.github.com/v3/
 \end_inset
 
 ) provides a collection of interfaces that allow individuals to query and
- explore various social characteristics, which are the focus of this paper.
+ explore various social characteristics: these attributes constitute the
+ focus of this paper.
  Each interface within the API is bound to a different context of GitHub
- data: Users, Activity, Organizations, etc.
+ data: (e.g., Users, Activity, Organizations, etc).
  Queries against these interfaces are executed through web requests - parametriz
 ed HTTP requests against specific URLs.
  Included in these interfaces is a generic search function, which permits
  queries that identify all repositories associated with a specific language.
- We will use this interface to target all GitHub repositories implemented
- in R.
- The following code sample below demonstrates a basic HTTP request using
- 
+ We have used this interface to target the GitHub repositories containing
+ R source code.
+ The following code sample demonstrates a basic HTTP request using 
 \begin_inset ERT
 status open
 
@@ -600,13 +581,18 @@ github.api <- function(query, acceptHeaders=""){
 
 \begin_layout Standard
 The code sample below demonstrates a hard-coded URL for a query that retrieves
- the first page of R repositories, providing 100 per page.
+ the first page of R repositories, providing 100 individual projects per
+ page.
  Entering this URL in a compatible web browser will return the results of
  the query.
- Also shown is a URL template and associated formatting function that will
- produce a URL for an arbitrary language, page, and count.
- Default parameters are provided, indicating that our hard-coded URL should
- be produced if alternate parameters are not provided.
+ A more generic URL template can be used to generate a URL for an arbitrary
+ language, page, and count.
+ Default parameters in the 
+\emph on
+github.api.search
+\emph default
+ function indicate that the hard-coded URL should be produced if alternate
+ parameters are not provided.
 \end_layout
 
 \begin_layout Standard
@@ -898,27 +884,26 @@ CRAN Subset
 \end_layout
 
 \begin_layout Standard
-Once we have collected the details of the R repositories hosted in GitHub,
- we will update the list to note those repositories that are also available
- from the Comprehensive R Archive Network (CRAN).
- The packages included in CRAN can be retrieved directly from R and are
- subject to a set of standards defined by the CRAN submission policies (
-\begin_inset Flex URL
-status collapsed
+Once details of the R repositories hosted in GitHub were collected, an updated
+ list was produced to identify the repositories that are also available
+ from the Comprehensive R Archive Network (CRAN
+\begin_inset Foot
+status open
 
 \begin_layout Plain Layout
-
-http://cran.r-project.org/web/packages/policies.html
+The packages included in CRAN can be retrieved directly from R and are subject
+ to a set of standards defined by the CRAN submission policies (http://cran.r-pro
+ject.org/web/packages/policies.html).
 \end_layout
 
 \end_inset
 
 ).
- Having identified the CRAN repositories, we then focus on the remaining
- data to identify the other repository classes housed in GitHub.
- Our CRAN package identification process consists of web-scraping the CRAN
- package webpage, followed by a match operation on the package name.
- The match step assumes that the CRAN package name is the same as the GitHub
+ Having identified the CRAN repositories, the remaining API data was used
+ to identify additional repository classes housed in GitHub.
+ The CRAN package identification process consisted of web-scraping the CRAN
+ package webpage, followed by a match operation based on the package name.
+ The match step assumed that the CRAN package name is the same as the GitHub
  repository name.
  We see from the resulting data set, that this is frequently the case.
 \end_layout
@@ -929,7 +914,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<settings>>=
+<<settings, echo=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1190,11 +1175,11 @@ print(xtable(head(github.cran, 5), type="latex", digits=0, caption="Sample
 \end_layout
 
 \begin_layout Standard
-Now, having a method for identifying CRAN packages in a GitHub search, we
- can identify the owners of CRAN packages.
- With this list, we can then identify projects which may become packages
- in the future; those authored by previous CRAN developers, but which are
- not yet listed in the CRAN directory.
+Having established a method for identifying CRAN packages in a GitHub search,
+ the process was revised to identify the owners of the CRAN packages.
+ With this list, we were able to identify projects which would more likely
+ become CRAN packages in the future; those authored by previous CRAN developers,
+ but which were not yet listed in the CRAN directory.
  If nothing else, these projects may be of interest to developers wishing
  to join an ongoing project, with more senior developers.
 \end_layout
@@ -1273,9 +1258,9 @@ Forks and Watchers
 \end_layout
 
 \begin_layout Standard
-Two key social metrics we will review are forks and watchers.
- Forks, as we discussed earlier, are independent branches of development,
- spawned from an original root repository.
+Two key social metrics we reviewed were forks and watchers.
+ Forks, as discussed earlier, are independent branches of development, spawned
+ from an original root repository.
  Developers may create new forks for several reasons.
 \end_layout
 
@@ -1320,11 +1305,11 @@ A final scenario exists in which the repository owner does not want the
 \end_layout
 
 \begin_layout Standard
-The watchers' metric is far less complicated.
+The watchers metric is far less complicated.
  Here, in a fashion similar to that used on Twitter, individual developers
  can simply watch a project or another developer.
- When changes occur within an associated project, or within any project
- developed by a watched programmer, the watching developer will be notified.
+ When changes occur within an associated project - or within any project
+ developed by a watched programmer - the watching developer will be notified.
  Developers associated with high watch counts would be 'rockstars' as noted
  by 
 \begin_inset CommandInset citation
@@ -1731,10 +1716,10 @@ CRAN Subset
 \end_layout
 
 \begin_layout Standard
-Given the collection of CRAN packages we collected in the web scraping task
- earlier, we can alter our visualization to highlight the CRAN packages
- which exist in our data set.
- Additionally, the time axis will be updated to indicate the current version
+Given the collection of CRAN packages collected in the web scraping task
+ earlier, we have altered the Forks visualization to better highlight the
+ CRAN packages existing in the data set.
+ Additionally, the time axis has been updated to indicate the current version
  of R associated with the project's creation date.
 \end_layout
 
@@ -1868,7 +1853,7 @@ CRAN Packages by R Version
 \end_layout
 
 \begin_layout Standard
-The contours shown in Figure 
+As an alternate visualization, the contours shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Density-Plot-for"
@@ -2007,7 +1992,7 @@ reference "fig:R-Repository-Activity"
  The activity level is defined here as the time between the repository's
  last update and its creation date.
  The visualization includes a guide line indicating the optimal activity
- level for a given repository creation date on the x-axis.
+ level for a given repository creation date, which is shown on the x-axis.
  Note, however, that the indicated project length simply represents recent
  activity, not necessarily distributed activity throughout the life of the
  project.
@@ -2152,7 +2137,7 @@ reference "fig:R-Repository-Social-Activity"
  10 forks.
  Additionally, this figure helps identify the short-lived projects with
  high impact in the community, including tutorials (twitter-sentiment-analysis-t
-utorial-201107) and competitions (r_recommendation_system).
+utorial-201107) and developer competitions (r_recommendation_system).
 \end_layout
 
 \begin_layout Standard
@@ -2316,7 +2301,7 @@ pkg{ggplot2}
 \end_layout
 
 \begin_layout Standard
-Collecting the data for these visualizations requires interfacing with a
+Collecting the data for these visualizations required interfacing with a
  new GitHub API method.
  For this example, to query activity related to 
 \begin_inset ERT
@@ -2331,7 +2316,7 @@ pkg{ggplot2}
 
 \end_inset
 
- we use the URL (
+ we used the URL (
 \begin_inset Flex URL
 status collapsed
 
@@ -2497,20 +2482,7 @@ reference "fig:GitHub-style-Contribution-Plot;"
  These visualizations demonstrate that the bulk of project activity occurred
  in the first 300 weeks of development.
  Thus, the ggplot2 library now appears to be in maintenance mode; (data
- collected 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-Sexpr{format(Sys.Date(), format="%B %d, %Y")}
-\end_layout
-
-\end_inset
-
-).
+ collected May 21, 2014).
 \end_layout
 
 \begin_layout Standard
@@ -3009,6 +2981,19 @@ strong{RJournal.lyx}
 \end_inset
 
  template provided by Yihui Xie.
+ The associated LyX source document - used to produce this article - is
+ available on GitHub: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://github.com/patricktoohey/GitHubR/tree/master/Article
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
