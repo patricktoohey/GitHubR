@@ -1336,7 +1336,7 @@ status open
 
 \begin_layout Plain Layout
 
-threshold.forks <- 150
+threshold.forks <- 130
 \end_layout
 
 \begin_layout Plain Layout
@@ -1383,15 +1383,8 @@ Sexpr{threshold.watchers}
 \end_inset
 
  watchers.
- This collection of elite R repositories includes CRAN packages, the source
- code associated with books 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "ML_for_Hackers"
-
-\end_inset
-
-, and a repository dedicated to a Massive Open Online Course (MOOC) (
+ This collection of elite R repositories includes CRAN packages and a repository
+ dedicated to a Massive Open Online Course (MOOC) (
 \begin_inset Flex URL
 status open
 
@@ -1403,6 +1396,43 @@ https://www.coursera.org/instructor/~47
 \end_inset
 
 ).
+ 
+\end_layout
+
+\begin_layout Standard
+One specific project, 
+\emph on
+ML_for_Hackers
+\emph default
+, which maintains the source code associated with 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ML_for_Hackers"
+
+\end_inset
+
+, has been excluded from the visualizations in Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GitHub-R-Repository-Forks"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GitHub-R-Repository-Watchers"
+
+\end_inset
+
+ due to its sheer dominance in the associated metrics.
+ With over 500 forks and 900 watchers, the project demonstrates a unique
+ use case that may not exist for the remaining projects shown in the visualizati
+ons.
+ Specifically, readers of the associated book - as they follow along with
+ the code in each chapter - are likely to fork the project so they may save
+ their progress and any deviations from the code discussed in the text.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1418,7 +1448,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<frequently-forked, echo=FALSE, warning=FALSE, fig.height=3, message=FALSE>>=
+<<frequently-forked, echo=FALSE, warning=FALSE, fig.height=5, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1461,12 +1491,17 @@ library(scales)
 
 \begin_layout Plain Layout
 
-github.forked <- subset(github, Forks > threshold.forks) 
+github.packages <- subset(github, Forks < 500)
 \end_layout
 
 \begin_layout Plain Layout
 
-r <- ggplot(github, aes(x=as.Date(Created), y=Forks))
+github.forked <- subset(github.packages, Forks > threshold.forks)
+\end_layout
+
+\begin_layout Plain Layout
+
+r <- ggplot(github.packages, aes(x=as.Date(Created), y=Forks))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1502,11 +1537,6 @@ r <- r + aes(size = Watchers)
 \begin_layout Plain Layout
 
 r <- r + scale_size(guide=guide_legend())
-\end_layout
-
-\begin_layout Plain Layout
-
-r <- r + scale_y_continuous(breaks=c(0, 200, 400))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1569,7 +1599,17 @@ ggsave("../Figures/repos_forked.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-GitHub R Repository Forks
+GitHub R Repository Forks by Creation Date: point size indicates number
+ of Watchers.
+ Top projects are labeled and include Watcher count.
+ Project ML_for_Hackers is excluded from this visualization.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GitHub-R-Repository-Forks"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1595,7 +1635,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<frequently-watched, echo=FALSE, warning=FALSE, fig.height=6, message=FALSE>>=
+<<frequently-watched, echo=FALSE, warning=FALSE, fig.height=5, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1698,7 +1738,17 @@ ggsave("../Figures/repos_watched.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-GitHub R Repository Watchers
+GitHub R Repository Watchers by Creation Date: point size indicates number
+ of Forks.
+ Top projects are labeled and include Fork count.
+ Project ML_for_Hackers is excluded from this visualization.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GitHub-R-Repository-Watchers"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1783,12 +1833,13 @@ status open
 
 \begin_layout Plain Layout
 
-<<forked-cran, echo=FALSE, message=FALSE>>=
+<<forked-cran, echo=FALSE, message=FALSE, fig.width=7>>=
 \end_layout
 
 \begin_layout Plain Layout
 
-github.cran <- transform(github, Package = ifelse(is.na(CRAN), "Other", "CRAN"))
+github.cran <- transform(github.packages, Package = ifelse(is.na(CRAN), "Other",
+ "CRAN"))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1800,8 +1851,14 @@ ter"))
 \begin_layout Plain Layout
 
 crans <- crans + theme(panel.grid.minor=element_blank(), panel.grid.major=element_li
-ne(size=0.1)) + xlab("Project Creation Date Relative to R Versions" + ylab("log10
-(Forks+1)"))
+ne(size=0.1)) + xlab("Project Creation Date Relative to R Versions") + ylab("log1
+0(Forks+1)")
+\end_layout
+
+\begin_layout Plain Layout
+
+crans <- crans + theme(panel.grid.minor=element_blank(), panel.grid.major=element_li
+ne(size=0.1))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1845,7 +1902,9 @@ ggsave("../Figures/cran_repos.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-CRAN Packages by R Version
+Project forks with point color used to distinguish CRAN packages.
+ Creation date of associated project represented by the official R version
+ at the time of creation.
 \end_layout
 
 \end_inset
@@ -2262,7 +2321,8 @@ ggsave("../Figures/r_activity.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-R Repository Social Activity
+R Repository Social Activity, with point size demonstrating relative fork
+ count.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:R-Repository-Social-Activity"
@@ -2573,7 +2633,7 @@ p <- ggplot() + geom_line(data=commits.ggplot, aes(x=week, y=log(project_total))
 
 \begin_layout Plain Layout
 
-p + ylab("Commits (log scale)") + xlab("Project Weeks")
+p + ylab("Commits (log10 scale)") + xlab("Project Weeks")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2632,7 +2692,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<area_ggplot, echo=FALSE, message=FALSE>>=
+<<area_ggplot, echo=FALSE, message=FALSE, fig.height=9>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -2642,8 +2702,8 @@ l <- ggplot(commits.ggplot) + geom_line(color="#1e6823")
 
 \begin_layout Plain Layout
 
-l <- l + aes(x=week, y=log(commits)) + ylab("Commits (log scale)") + xlab("Proje
-ct Weeks")
+l <- l + aes(x=week, y=log(commits)) + ylab("Commits (log10 scale)") + xlab("Pro
+ject Weeks")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3045,7 +3105,7 @@ Patrick Toohey
 \begin_inset Newline newline
 \end_inset
 
-Human-Computer Interaction
+Human-Computer Interaction Program
 \begin_inset Newline newline
 \end_inset
 
