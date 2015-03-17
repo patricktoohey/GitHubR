@@ -97,8 +97,7 @@ usepackage{Sweave}
 \end_layout
 
 \begin_layout Title
-Exploring the social and developmental landscapes of R through an analysis
- of GitHub repositories
+Exploring the landscape of R through an analysis of GitHub repositories
 \end_layout
 
 \begin_layout Author
@@ -108,19 +107,15 @@ by Patrick Toohey and Roger S.
 
 \begin_layout Abstract
 Since its inception in 2008, GitHub has come to house over 1000 R-language
- projects, including over 180 CRAN packages.
- In this article we present the social structure of the R community on GitHub
- using the GitHub API: an open web programming interface to GitHub's repositorie
-s and metadata.
- This generic API includes search facilities that can enumerate repositories
- associated with specific programming languages.
+ repositories, including source code for books, online tutorials, and over
+ 180 CRAN packages.
+ In this article we present the structure of the R community on GitHub using
+ the GitHub API: an open web programming interface to GitHub's repositories
+ and metadata.
+ This API includes search facilities that can enumerate repositories associated
+ with specific programming languages.
  The interface allowed us to investigate the landscape of R development
- on GitHub and identify key projects with substantial social impact on the
- community.
- Having identified projects of interest, we used additional facilities of
- the API to harvest related development activity data, which facilitated
- visualizations demonstrating the scope of collaboration within individual
- repositories.
+ on GitHub and identify key projects with substantial impact on the community.
 \end_layout
 
 \begin_layout Section
@@ -247,9 +242,9 @@ key "Spinellis:2012:GIT:2225055.2225246"
 \end_inset
 
  introduces GitHub as a host for Git projects.
- Beyond its core functionality, GitHub promotes the social aspects of software
- development by providing special facilities that encourage collaboration
- between communities of developers.
+ Beyond its core functionality, GitHub promotes the collaborative aspects
+ of software development by providing special facilities that encourage
+ communication between communities of developers.
  GitHub allows users to watch projects and developers of interest and be
  notified of new activities.
 \end_layout
@@ -304,7 +299,8 @@ url{http://r-forge.r-project.org/}
 
 \end_inset
 
-) is a GitHub alternative focused primarily on projects related to R development
+) is a SVN-based GitHub alternative with 1,634 projects and 7,113 users
+ (December 2013) focused primarily on projects related to R development
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -319,61 +315,6 @@ key "RJournal_2009-1_Theussl+Zeileis"
 
 , Google Code, etc.) we will focus on GitHub due to its dominance in the
  domain and publicly available API, which will be discussed shortly.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<hosts, echo=FALSE, results='asis'>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-library(xtable)
-\end_layout
-
-\begin_layout Plain Layout
-
-Host <- c("R-Forge", "GitHub")
-\end_layout
-
-\begin_layout Plain Layout
-
-Projects <- c("1,634", "9,700,000")
-\end_layout
-
-\begin_layout Plain Layout
-
-Users <- c("7,113", "4,700,000")
-\end_layout
-
-\begin_layout Plain Layout
-
-BackEnd <- c("SVN", "Git")
-\end_layout
-
-\begin_layout Plain Layout
-
-repos <- data.frame(Host, Projects, Users, BackEnd)
-\end_layout
-
-\begin_layout Plain Layout
-
-print(xtable(repos, type="latex", digits=0, caption="Total usage statistics
- (December 2013)"), include.rownames=FALSE, caption.placement="top")
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -393,10 +334,10 @@ key "Bird:2009:PPM:1590955.1591132"
 \end_inset
 
 .
- Our investigation targeted the social aspects of the R community with special
- focus on repository forks, watchers, and collaboration.
+ Our investigation targeted the collaborative aspects of the R community
+ with special focus on repository forks, and watchers.
  Researchers have identified these areas as key metrics developers consider
- when determining the strength of a given project: 
+ when determining the strength of a given project 
 \begin_inset CommandInset citation
 LatexCommand citep*
 before "e.g., "
@@ -417,7 +358,7 @@ While public repositories on GitHub are visible to anyone with a web browser,
  Thus, it is important for us to be aware that the actual R community on
  GitHub may be larger than our analysis suggests.
  Alternate methods, like surveys, would be required to understand usage
- of developers that utilize GitHub's private repositories 
+ by developers and teams with private repositories 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Meyerovich:2012:SDR:2414721.2414724"
@@ -444,57 +385,18 @@ http://developer.github.com/v3/
 \end_inset
 
 ) provides a collection of interfaces that allow individuals to query and
- explore various social characteristics: these attributes constitute the
- focus of this paper.
+ explore collaboration metrics, which constitute the focus of this paper.
  Each interface within the API is bound to a different context of GitHub
  data: (e.g., Users, Activity, Organizations, etc).
- Queries against these interfaces are executed through web requests - parametriz
-ed HTTP requests against specific URLs.
  Included in these interfaces is a generic search function, which permits
  queries that identify all repositories associated with a specific language.
  We have used this interface to target the GitHub repositories containing
  R source code.
- The following code sample demonstrates a basic HTTP request using 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-pkg{RCurl}
-\end_layout
-
-\end_inset
-
-.
- Parsing of the resultant 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-strong{JSON}
-\end_layout
-
-\end_inset
-
- data is then executed with the 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-pkg{rjson}
-\end_layout
-
-\end_inset
-
- package.
+ GitHub's top R repositories - sorted by 
+\emph on
+Watcher
+\emph default
+ count - are shown in below.
 \end_layout
 
 \begin_layout Standard
@@ -503,7 +405,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<github-api-generic, warning=FALSE, message=FALSE>>=
+<<github-api-generic, warning=FALSE, message=FALSE, echo=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -580,28 +482,12 @@ github.api <- function(query, acceptHeaders=""){
 \end_layout
 
 \begin_layout Standard
-The code sample below demonstrates a hard-coded URL for a query that retrieves
- the first page of R repositories, providing 100 individual projects per
- page.
- Entering this URL in a compatible web browser will return the results of
- the query.
- A more generic URL template can be used to generate a URL for an arbitrary
- language, page, and count.
- Default parameters in the 
-\emph on
-github.api.search
-\emph default
- function indicate that the hard-coded URL should be produced if alternate
- parameters are not provided.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-<<github-search-generic, echo=TRUE, results='asis', tidy=TRUE>>=
+<<github-search-generic, echo=FALSE, results='asis', tidy=TRUE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -758,7 +644,8 @@ page1.r <- page.data()
 \begin_layout Plain Layout
 
 print(xtable(head(page1.r), type="latex", digits=0, caption="Sample GitHub
-  API Search Results (R)"), include.rownames=FALSE, caption.placement="top")
+ API search results showing top R repositories sorted by Watcher count"),
+ include.rownames=FALSE, caption.placement="top")
 \end_layout
 
 \begin_layout Plain Layout
@@ -905,7 +792,34 @@ ject.org/web/packages/policies.html).
  package webpage, followed by a match operation based on the package name.
  The match step assumed that the CRAN package name is the same as the GitHub
  repository name.
- We see from the resulting data set, that this is frequently the case.
+ We see from the resulting data set - shown in Table 2 - that some commonly
+ used CRAN packages are maintained in GitHub (e.g., 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{ggplot2}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{shiny}
+\end_layout
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -919,7 +833,7 @@ status open
 
 \begin_layout Plain Layout
 
-data.live <- FALSE
+data.live <- TRUE
 \end_layout
 
 \begin_layout Plain Layout
@@ -938,7 +852,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<packages>>=
+<<packages, echo=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1053,6 +967,11 @@ if (data.live) {
 \begin_layout Plain Layout
 
   github <- repos.r()
+\end_layout
+
+\begin_layout Plain Layout
+
+  write.csv(github, "../Data/repos.csv")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1177,10 +1096,9 @@ print(xtable(head(github.cran, 5), type="latex", digits=0, caption="Sample
 \begin_layout Standard
 Having established a method for identifying CRAN packages in a GitHub search,
  the process was revised to identify the owners of the CRAN packages.
- With this list, we were able to identify projects which would more likely
- become CRAN packages in the future; those authored by previous CRAN developers,
- but which were not yet listed in the CRAN directory.
- If nothing else, these projects may be of interest to developers wishing
+ With this list, we were able to identify repositories authored by previous
+ CRAN developers.
+ The repositories shown in Table 3 may be of interest to developers wishing
  to join an ongoing project, with more senior developers.
 \end_layout
 
@@ -1190,7 +1108,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<cran-future>>=
+<<cran-future, echo=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1336,12 +1254,12 @@ status open
 
 \begin_layout Plain Layout
 
-threshold.forks <- 130
+threshold.forks <- 375
 \end_layout
 
 \begin_layout Plain Layout
 
-threshold.watchers <- 250
+threshold.watchers <- 850
 \end_layout
 
 \begin_layout Plain Layout
@@ -1383,20 +1301,6 @@ Sexpr{threshold.watchers}
 \end_inset
 
  watchers.
- This collection of elite R repositories includes CRAN packages and a repository
- dedicated to a Massive Open Online Course (MOOC) (
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://www.coursera.org/instructor/~47
-\end_layout
-
-\end_inset
-
-).
- 
 \end_layout
 
 \begin_layout Standard
@@ -1426,13 +1330,102 @@ reference "fig:GitHub-R-Repository-Watchers"
 \end_inset
 
  due to its sheer dominance in the associated metrics.
- With over 500 forks and 900 watchers, the project demonstrates a unique
- use case that may not exist for the remaining projects shown in the visualizati
-ons.
+ With over 1000 forks and 1500 watchers, the project demonstrates a use
+ case that may not exist for the R packages shown in the visualizations.
  Specifically, readers of the associated book - as they follow along with
  the code in each chapter - are likely to fork the project so they may save
  their progress and any deviations from the code discussed in the text.
+ This same use case likely exists for repositories - like 
+\emph on
+labs
+\emph default
+, shown in the visualization - that are associated with online and college
+ courses (e.g., 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.coursera.org/instructor/~47
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.edx.org/course/statistics-r-life-sciences-harvardx-ph525-1
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The repositories with higher 
+\emph on
+Watcher
+\emph default
+ counts, shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GitHub-R-Repository-Watchers"
+
+\end_inset
+
+, likely have followers interested simply in knowing when changes have occurred.
+ These followers may never make changes of their own, but instead wish to
+ be alerted that changes have been made by others.
+ The highlighted respositories in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GitHub-R-Repository-Watchers"
+
+\end_inset
+
+ include common R packages (e.g., 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{ggplot2}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{shiny}
+\end_layout
+
+\end_inset
+
+), as well as a repository that maintains content for the online publication
  
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://fivethirtyeight.com/
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1448,7 +1441,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<frequently-forked, echo=FALSE, warning=FALSE, fig.height=5, message=FALSE>>=
+<<frequently-forked, echo=FALSE, warning=FALSE, fig.height=3, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1491,7 +1484,7 @@ library(scales)
 
 \begin_layout Plain Layout
 
-github.packages <- subset(github, Forks < 500)
+github.packages <- subset(github, Forks < 1000)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1635,7 +1628,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<frequently-watched, echo=FALSE, warning=FALSE, fig.height=5, message=FALSE>>=
+<<frequently-watched, echo=FALSE, warning=FALSE, fig.height=3, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1670,7 +1663,7 @@ r <- r + geom_point(alpha=0.5, color="#384f7a") + aes(size = Forks)
 
 \begin_layout Plain Layout
 
-r <- r + xlab("Creation Date") + ylim(0, 900) + ylab("Watchers")
+r <- r + xlab("Creation Date") + ylim(0, 1200) + ylab("Watchers")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1833,7 +1826,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<forked-cran, echo=FALSE, message=FALSE, fig.width=7>>=
+<<forked-cran, echo=FALSE, message=FALSE, fig.height=6>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1851,8 +1844,8 @@ ter"))
 \begin_layout Plain Layout
 
 crans <- crans + theme(panel.grid.minor=element_blank(), panel.grid.major=element_li
-ne(size=0.1)) + xlab("Project Creation Date Relative to R Versions") + ylab("log1
-0(Forks+1)")
+ne(size=0.1)) + xlab("Project Creation Date Relative to R Versions") + ylab("Fork
+s")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1864,13 +1857,14 @@ ne(size=0.1))
 \begin_layout Plain Layout
 
 crans <- crans + geom_point(aes(color=Package), alpha=0.8) + scale_colour_manual(
-values=c("#4a4ff3", "#5e5e5e"))
+values=c("#336699", "#fb8b00"))
 \end_layout
 
 \begin_layout Plain Layout
 
 crans <- crans + scale_x_date(breaks=date.release, labels=version.release)
- + theme(axis.text.x=element_text(size=7, angle=60, hjust=1))
+ + scale_y_continuous(breaks=c(0, log(10), log(100)), labels=c("1", "10",
+ "100")) + theme(axis.text.x=element_text(size=7, angle=60, hjust=1))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1905,108 +1899,6 @@ ggsave("../Figures/cran_repos.svg")
 Project forks with point color used to distinguish CRAN packages.
  Creation date of associated project represented by the official R version
  at the time of creation.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As an alternate visualization, the contours shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Density-Plot-for"
-
-\end_inset
-
- demonstrate the distribution of the 
-\begin_inset Quotes eld
-\end_inset
-
-popularity
-\begin_inset Quotes erd
-\end_inset
-
- metrics (forks and watchers) for the CRAN and Non-CRAN subsets.
- There are dense portions in both subsets around the origin: 1 watcher (the
- owner) and no forks.
- The contours do demonstrate that presence in CRAN is not the only way to
- attract attention for a project, as both graphs show a similar distribution.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<density, echo=FALSE, fig.height=4, warning=FALSE, message=FALSE>>= 
-\end_layout
-
-\begin_layout Plain Layout
-
-social <- ggplot(github.cran, aes(x=log2(Watchers+1), y=log2(Forks+1)))
-\end_layout
-
-\begin_layout Plain Layout
-
-social <- social + geom_point(alpha=0.5, color="#384f7a") + facet_grid(.~Package)
-\end_layout
-
-\begin_layout Plain Layout
-
-social <- social + xlim(-1,7) + ylim(-1,6.2) + theme(legend.position="none")
-\end_layout
-
-\begin_layout Plain Layout
-
-social <- social + geom_density2d(colour="blue", bins=5)
-\end_layout
-
-\begin_layout Plain Layout
-
-social + ylab("Forks") + xlab("Watchers")
-\end_layout
-
-\begin_layout Plain Layout
-
-ggsave("../Figures/cran_density.svg")
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Density Plot for CRAN and Non-CRAN Repositories (log2 scales)
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Density-Plot-for"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -2096,7 +1988,7 @@ ated)))
 
 \begin_layout Plain Layout
 
-r <- r + geom_line(aes(y=as.integer(as.Date("2014-03-01", "%Y-%m-%d"))-as.integer(a
+r <- r + geom_line(aes(y=as.integer(as.Date("2015-02-21", "%Y-%m-%d"))-as.integer(a
 s.Date(Created))), colour="blue", alpha=0.5)
 \end_layout
 
@@ -2321,635 +2213,10 @@ ggsave("../Figures/r_activity.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-R Repository Social Activity, with point size demonstrating relative fork
- count.
+R Repository Activity, with point size demonstrating relative fork count.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:R-Repository-Social-Activity"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Contributors
-\end_layout
-
-\begin_layout Standard
-Activity for a given project is dependent on contributions from a collection
- of developers.
- The visualizations that follow demonstrate the total and individual contributio
-ns for the 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-pkg{ggplot2}
-\end_layout
-
-\end_inset
-
- package.
-\end_layout
-
-\begin_layout Standard
-Collecting the data for these visualizations required interfacing with a
- new GitHub API method.
- For this example, to query activity related to 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-pkg{ggplot2}
-\end_layout
-
-\end_inset
-
- we used the URL (
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-https://api.github.com/repos/hadley/ggplot2/stats/contributors
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<commits, tidy=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-commits.by.author <- function(author)  {   
-\end_layout
-
-\begin_layout Plain Layout
-
-  sapply(1:length(ggplot.commits[[author]]$weeks), function(i) ggplot.commits[[aut
-hor]]$weeks[[i]]$a)   
-\end_layout
-
-\begin_layout Plain Layout
-
-} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-author.totals <- function(i, author) {   
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits <- commits.by.author(i)    
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits <- data.frame(week=weekRange, author=author, commits=commits, total=NA)
-    
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits$total <- cumsum(commits$commits[weekRange])   
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits 
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Collect data
-\end_layout
-
-\begin_layout Plain Layout
-
-target <- "https://api.github.com/repos/hadley/ggplot2/stats/contributors"
-\end_layout
-
-\begin_layout Plain Layout
-
-ggplot.commits <- github.api(target)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Build data frame
-\end_layout
-
-\begin_layout Plain Layout
-
-weekRange <- 1:length(ggplot.commits[[1]]$weeks) 
-\end_layout
-
-\begin_layout Plain Layout
-
-authors <- sapply(1:length(ggplot.commits), function(i) ggplot.commits[[i]]$author
-$login)
-\end_layout
-
-\begin_layout Plain Layout
-
-commits.ggplot <- do.call('rbind', lapply(1:length(authors), function(i, author=au
-thors[[i]]) {
-\end_layout
-
-\begin_layout Plain Layout
-
-                            author.totals(i, author)
-\end_layout
-
-\begin_layout Plain Layout
-
-                         }))
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The resulting data can be presented using simple line geoms, as shown in
- Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Total-Contribution-(ggplot2)"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Individual-Contributions-(ggplot"
-
-\end_inset
-
-, or using GitHub's signature progress visualization, shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:GitHub-style-Contribution-Plot;"
-
-\end_inset
-
-.
- These visualizations demonstrate that the bulk of project activity occurred
- in the first 300 weeks of development.
- Thus, the ggplot2 library now appears to be in maintenance mode; (data
- collected May 21, 2014).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<project_area, fig.height=2, echo=FALSE, message=FALSE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-if (data.live) {
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits.ggplot <- ddply(commits.ggplot, .(week), mutate, project_total =
- sum(commits))
-\end_layout
-
-\begin_layout Plain Layout
-
-  write.csv(commits.ggplot, "../Data/commits_ggplot.csv")
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-} else {
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-  # Read previously created data set hosted on GitHub
-\end_layout
-
-\begin_layout Plain Layout
-
-  url.data <- "https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data/
-commits_ggplot.csv"
-\end_layout
-
-\begin_layout Plain Layout
-
-  commits.ggplot<- read.csv(text = getURL(url.data, ssl.verifypeer = FALSE,
- .opts=opts))
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- ggplot() + geom_line(data=commits.ggplot, aes(x=week, y=log(project_total)),
- color="#1e6823")
-\end_layout
-
-\begin_layout Plain Layout
-
-p + ylab("Commits (log10 scale)") + xlab("Project Weeks")
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-ggsave("../Figures/ggplot_line_all.svg")
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Total Contribution (commits) to ggplot2
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Total-Contribution-(ggplot2)"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<area_ggplot, echo=FALSE, message=FALSE, fig.height=9>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-l <- ggplot(commits.ggplot) + geom_line(color="#1e6823") 
-\end_layout
-
-\begin_layout Plain Layout
-
-l <- l + aes(x=week, y=log(commits)) + ylab("Commits (log10 scale)") + xlab("Pro
-ject Weeks")
-\end_layout
-
-\begin_layout Plain Layout
-
-l + facet_wrap(~author, ncol=2) + theme(strip.text.x=element_text(family=font,
- hjust=0.01))
-\end_layout
-
-\begin_layout Plain Layout
-
-ggsave("../Figures/ggplot_line_authors.svg")
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Individual Contributions (commits) to ggplot2
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Individual-Contributions-(ggplot"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<contributions_ggplot2, echo=FALSE, tidy=TRUE, message=FALSE, fig.width=6,
- fig.height=2.25>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-library(grid)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-divisions <- 5  
-\end_layout
-
-\begin_layout Plain Layout
-
-blank <- "#aaaaaa" 
-\end_layout
-
-\begin_layout Plain Layout
-
-select.authors <- c("hadley", "wch", "kohske") 
-\end_layout
-
-\begin_layout Plain Layout
-
-legend.labels <- c("Less", "", "", "More")
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-commits.ggplot <- within(commits.ggplot, commits <- ifelse(commits==0, NA,
- commits))
-\end_layout
-
-\begin_layout Plain Layout
-
-commits.ggplot.primary <- subset(commits.ggplot, author %in% select.authors)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- ggplot(commits.ggplot.primary, aes(x=floor((week-1)/divisions), y=divisions-(
-(week-1)%%divisions), fill=commits))
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- p + geom_tile(colour="white", size=0.2) + coord_fixed(ratio=1)
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- p + facet_grid(author~.) + xlab("") + ylab("")
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- p + scale_fill_gradient(low="#c4d852", high="#1e6823", na.value="#e3e3e3",
- breaks=c(10,3940,5910,7880), labels=legend.labels,                     
-          guide=guide_legend(direction="horizontal", label.position="top",
- keywidth=1, keyheight=1, label.theme=element_text(angle=0, size = 6, color=blank
-)))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- theme(plot.margin=unit(c(1,0.1,0,-1),"cm"), plot.background=theme_bl
-ank()) 
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(panel.grid=theme_blank(), panel.border=theme_bl
-ank(), panel.background=theme_blank())
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(legend.position=c(0.12, 1.2), legend.title=elemen
-t_blank())
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(axis.ticks.x=element_line(color=blank),
- axis.text=element_text(color=blank)) 
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(axis.ticks.y=element_blank(), axis.text.y=element
-_blank()) 
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(axis.line=element_blank())
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(strip.text.y = element_text(angle=0, size
- = 10, hjust = 0, vjust = 0.5, color="black"))  
-\end_layout
-
-\begin_layout Plain Layout
-
-github.theme <- github.theme + theme(strip.background=element_rect(colour="white",
- fill="white"))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Set Axis Breaks 
-\end_layout
-
-\begin_layout Plain Layout
-
-years <- c("Dec '08", "Dec '09", "Dec '10", "Dec '11", "Dec '12", "Dec '13")
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- p + scale_x_continuous(breaks=c(7, 18, 29, 40, 51, 63), labels=years)
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-p <- p + github.theme
-\end_layout
-
-\begin_layout Plain Layout
-
-p
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-ggsave("../Figures/github_ggplot2.svg")
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-GitHub-style Contribution Plot; Weekly Contributions (ggplot2)
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:GitHub-style-Contribution-Plot;"
 
 \end_inset
 
