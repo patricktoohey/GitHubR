@@ -106,7 +106,7 @@ by Patrick Toohey and Roger S.
 \end_layout
 
 \begin_layout Abstract
-Since its inception in 2008, GitHub has come to house over 1000 R-language
+Since its inception in 2008, GitHub has come to house over 1,000 R-language
  repositories, including collections of online tutorials and courses, source
  code supplements to accompany books about R, and nearly 300 CRAN packages.
  In this article we visualize GitHub's growing R community using data collected
@@ -213,9 +213,9 @@ http://developer.github.com/v3/
 status open
 
 \begin_layout Plain Layout
-The search query for R repositories returns a maximum of 1000 rows and has
- been found to include projects from other languages that use the .r file
- extension.
+The search query for R repositories returns a maximum of 1,000 rows and
+ has been found to include projects from other languages that use the .r
+ file extension.
  Accordingly, it is difficult to precisely quantifying the number of R projects
  on GitHub.
 \end_layout
@@ -1072,12 +1072,36 @@ display.threshold.watchers <- 1500
 
 \begin_layout Standard
 An initial view of GitHub's R community was collected through the API in
- late 2013.
+ late 2013
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The archived dataset, including data from later collections, is available
+ on GitHub: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://raw.githubusercontent.com/patricktoohey/GitHubR/master/Data//github.history.
+csv
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
  At that time, the 
 \emph on
 ML_for_Hackers
 \emph default
- project was a clear outlier, with common R packages (e.g., 
+ project was a clear outlier, registering 769 watchers and 385 project forks.
+ The most frequently forked packages in that early sample (
 \begin_inset ERT
 status open
 
@@ -1090,7 +1114,20 @@ pkg{ggplot2}
 
 \end_inset
 
- and 
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{devtools}
+\end_layout
+
+\end_inset
+
+, and 
 \begin_inset ERT
 status open
 
@@ -1103,48 +1140,50 @@ pkg{knitr}
 
 \end_inset
 
-) holding less than half as many project forks.
- Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:GitHub-R-Repository-Forks"
+) respectively registered only 123, 130, and 157.
+ 
+\end_layout
 
-\end_inset
-
- and 
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:GitHub-R-Repository-Forks-2015"
 
 \end_inset
 
- illustrate the growth in the utilization of project forks since that original
- dataset was collected.
- GitHub now contains eight projects with more than 300 forks, demonstrating
- increased involvement from the developer community.
+ illustrates subsequent growth in the utilization of project forks since
+ that original dataset, with GitHub now containing eight projects with more
+ than 300 forks.
+ This growth might indicate that the number of the developers contributing
+ to the GitHub-hosted projects, particularly those used to document research,
+ is on the rise.
+ 
 \end_layout
 
 \begin_layout Standard
-Equivalent visualizations of the 
+An equivalent visualization of the 
 \emph on
 Watcher
 \emph default
- metric are provided in Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:GitHub-R-Repository-Watchers-1"
-
-\end_inset
-
- and 
+ metric, provided in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:GitHub-R-Repository-Watchers"
 
 \end_inset
 
-, which show substantial growth for the labeled projects.
- Common R packages are represented in each sample, including 
+, shows a strong following for the same class of utility packages demonstrated
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GitHub-R-Repository-Forks-2015"
+
+\end_inset
+
+.
+ Commonly used R packages are represented in each visualization, including
+ 
 \begin_inset ERT
 status open
 
@@ -1179,10 +1218,13 @@ pkg{devtools}
 
 \end_inset
 
- package is of particular interest as it facilitates direct integration
- of GitHub-hosted packages during R sessions.
- Accordingly, it is worthwhile illustrating the connection between GitHub
- and official Comprehensive R Archive Network (CRAN) packages.
+ package is of particular interest as it is designed specifically to simplify
+ the efforts of package developers by providing facilities for documentation,
+ testing, and, most important to this discussion, direct integration of
+ GitHub-hosted packages during R sessions.
+ With such a tool available to the community, it is worthwhile illustrating
+ the connection between GitHub and official Comprehensive R Archive Network
+ (CRAN) packages.
 \end_layout
 
 \begin_layout Standard
@@ -1354,7 +1396,7 @@ label.watched <- geom_text(aes(label=sprintf("%i Watching", Watchers), hjust=0,
 
 \begin_layout Plain Layout
 
-r + label.name + label.owner + label.watched
+#r + label.name + label.owner + label.watched
 \end_layout
 
 \begin_layout Plain Layout
@@ -1365,28 +1407,6 @@ ggsave("../Figures/repos_forked.svg")
 \begin_layout Plain Layout
 
 @
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Sample collected 2013-10-08.
- GitHub R Repository Forks by Creation Date: point size indicates number
- of Watchers.
- Top projects are labeled and include Watcher count.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:GitHub-R-Repository-Forks"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -1670,7 +1690,7 @@ highlights <- c("ggplot2", "knitr", "ML_for_Hackers", "r_recommendation_system")
 
 \begin_layout Plain Layout
 
-r + labels + owners + label.forks
+#r + labels + owners + label.forks
 \end_layout
 
 \begin_layout Plain Layout
@@ -1681,28 +1701,6 @@ ggsave("../Figures/repos_watched.svg")
 \begin_layout Plain Layout
 
 @
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Sample collected 2013-10-08.
- GitHub R Repository Watchers by Creation Date: point size indicates number
- of Forks.
- Top projects are labeled and include Fork count.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:GitHub-R-Repository-Watchers-1"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -2050,7 +2048,7 @@ reference "fig:Project-watchers-CRAN"
 
 \begin_layout Standard
 The visible increase in GitHub activity occurring following the release
- of R version 2.11 in April of 2010 is likely related to the development
+ of R version 2.11 in April of 2010 is arguably related to the development
  of 
 \begin_inset ERT
 status open
@@ -2072,7 +2070,7 @@ reference "fig:Project-watchers-CRAN"
 \end_inset
 
 .
- The introduction of a utility like 
+ The GitHub repository for 
 \begin_inset ERT
 status open
 
@@ -2085,8 +2083,21 @@ pkg{devtools}
 
 \end_inset
 
-, which affords sharing of GitHub hosted packages, would likely benefit
- CRAN developers as much as those developing independently.
+ describes the package as, 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+Tools to make an R developer's life easier.
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+ It accomplishes this task in part by allowing R-users to load packages
+ directly from GitHub; a feature that would likely benefit CRAN developers
+ as much as those developing independently.
  The frequency distribution shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2223,13 +2234,13 @@ crans <- crans + scale_y_continuous(breaks=c(0, log(10), log(100)), labels=c("1"
 
 \begin_layout Plain Layout
 
-crans <- crans + geom_text(aes(label=Name, hjust=-0.2, vjust=0.3, family=font),
+crans <- crans + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font),
  data=subset(github.cran, Name=="devtools"), size=4.48, color="black")
 \end_layout
 
 \begin_layout Plain Layout
 
-crans <- crans + geom_text(aes(label=Created, hjust=-0.2, vjust=2.2, family=font),
+crans <- crans + geom_text(aes(label=Created, hjust=0, vjust=2.2, family=font),
  data=subset(github.cran, Name=="devtools"), size=2.8, color="black")  
 \end_layout
 
@@ -2394,28 +2405,32 @@ key "McDonald:2013:PPO:2468356.2468382"
  its value.
  Often, repositories are created on GitHub, but then incur little or no
  ongoing activity.
- 
-\end_layout
-
-\begin_layout Standard
-The plot in Figure 
+ The plot in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:R-Repository-Activity"
 
 \end_inset
 
- shows the level of activity for the R projects in GitHub.
- The activity level is defined here as the time between the repository's
- last update and its creation date.
- The visualization includes a guide line indicating the optimal activity
- level for a given repository creation date, which is shown on the x-axis.
- Note, however, that the indicated project length simply represents recent
+ focuses on this metric by visualizing the level of activity for the R projects
+ in GitHub.
+ 
+\end_layout
+
+\begin_layout Standard
+A project's activity level is defined here as the time between the repository's
+ last update and its creation date, where older projects still seeing activity
+ would have a higher relative activity level.
+ The visualization includes a guide line, which indicates for each respective
+ date, where the activity level would be if a new code change were provided
+ today.
+ Note, however, that the indicated activity level simply represents recent
  activity, not necessarily distributed activity throughout the life of the
  project.
- Regardless, repositories located along the x-axis are those which were
- added to GitHub, but have since seen no additional development effort.
- 
+ Regardless, repositories located along the x-axis are those that were added
+ to GitHub, but have since seen no additional development effort.
+ Such projects contrast with those along the diagonal, which regardless
+ of age, have seen recent activity.
 \end_layout
 
 \begin_layout Standard
@@ -2431,7 +2446,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<long-projects, echo=FALSE, fig.height=4, message=FALSE>>=
+<<long-projects, echo=FALSE, fig.height=3, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -2448,7 +2463,7 @@ ated)))
 
 \begin_layout Plain Layout
 
-r <- r + geom_line(aes(y=as.integer(as.Date("2015-08-18", "%Y-%m-%d"))-as.integer(a
+r <- r + geom_line(aes(y=as.integer(as.Date("2015-09-01", "%Y-%m-%d"))-as.integer(a
 s.Date(Created))), colour="blue", alpha=0.5)
 \end_layout
 
@@ -2551,10 +2566,19 @@ reference "fig:R-Repository-Social-Activity"
 \end_inset
 
  illuminates this point by removing all but those projects with more than
- 10 forks.
- Additionally, this figure helps identify the short-lived projects with
- high impact in the community, including tutorials (twitter-sentiment-analysis-t
-utorial-201107) and developer competitions (r_recommendation_system).
+ 100 watchers.
+ 
+\end_layout
+
+\begin_layout Standard
+This additional level of filtering shows, not surprisingly, that projects
+ with higher watch counts tend to maintain some level of activity over time.
+ Additionally, this figure helps identify the relatively short-lived projects,
+ like 
+\emph on
+ML_for_Hackers
+\emph default
+, with high impact in the community.
 \end_layout
 
 \begin_layout Standard
@@ -2570,7 +2594,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<long-popular-projects, echo=FALSE, fig.height=4, message=FALSE>>=
+<<long-popular-projects, echo=FALSE, fig.height=3, message=FALSE>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -2579,7 +2603,7 @@ status open
 
 \begin_layout Plain Layout
 
-highlights <- c("ggplot2", "knitr", "ML_for_Hackers", "r_recommendation_system")
+highlights <- c("ggplot2", "knitr", "shiny", "devtools")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2588,7 +2612,16 @@ highlights <- c("ggplot2", "knitr", "ML_for_Hackers", "r_recommendation_system")
 
 \begin_layout Plain Layout
 
-github.activity <- subset(github, Forks > 10)
+github.activity <- subset(github, Watchers > 100)
+\end_layout
+
+\begin_layout Plain Layout
+
+write.csv(github.activity, "../Data/project_activity.csv")
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -2598,24 +2631,13 @@ r <- ggplot(github.activity)
 
 \begin_layout Plain Layout
 
-r <- r + geom_point(data=subset(github, Name %in% highlights), color="white",
- aes(size=(Forks/max(Forks))*1.05, x=as.Date(Created), y=as.integer(as.Date(Pushed))
--as.integer(as.Date(Created))))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
 r <- r + geom_point(color="#384f7a", alpha=0.5) + theme(legend.position="none")
 \end_layout
 
 \begin_layout Plain Layout
 
-r <- r + aes(size=Forks/max(Forks), x=as.Date(Created), y=as.integer(as.Date(Pushed
-))-as.integer(as.Date(Created)))
+r <- r + aes(size=Watchers/max(Watchers), x=as.Date(Created), y=as.integer(as.Date(
+Pushed))-as.integer(as.Date(Created)))
 \end_layout
 
 \begin_layout Plain Layout
@@ -2624,26 +2646,32 @@ r <- r + aes(size=Forks/max(Forks), x=as.Date(Created), y=as.integer(as.Date(Pus
 
 \begin_layout Plain Layout
 
-r <- r + geom_text(aes(label=Name, hjust=-0.2, vjust=0.3, family=font), data=subse
-t(github.activity, Name=="ggplot2"), size=4, color="black")  
+r <- r + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font), data=subset(
+github.activity, Name=="ggplot2"), size=4, color="black")  
 \end_layout
 
 \begin_layout Plain Layout
 
-r <- r + geom_text(aes(label=Name, hjust=-0.2, vjust=0.3, family=font), data=subse
-t(github.activity, Name=="knitr"), size=4, color="black")  
+r <- r + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font), data=subset(
+github.activity, Name=="knitr"), size=4, color="black")  
 \end_layout
 
 \begin_layout Plain Layout
 
-r <- r + geom_text(aes(label=Name, hjust=1.05, vjust=0.3, family=font), data=subse
-t(github.activity, Name=="r_recommendation_system"), size=4, color="black")
+r <- r + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font), data=subset(
+github.activity, Name=="shiny"), size=4, color="black")
 \end_layout
 
 \begin_layout Plain Layout
 
-r <- r + geom_text(aes(label=Name, hjust=1.05, vjust=0.3, family=font), data=subse
-t(github.activity, Name=="ML_for_Hackers"), size=4, color="black")
+r <- r + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font), data=subset(
+github.activity, Name=="devtools"), size=4, color="black")
+\end_layout
+
+\begin_layout Plain Layout
+
+r <- r + geom_text(aes(label=Name, hjust=0, vjust=0.3, family=font), data=subset(
+github.activity, Name=="ML_for_Hackers"), size=4, color="black")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2679,7 +2707,8 @@ ggsave("../Figures/r_activity.svg")
 \begin_inset Caption
 
 \begin_layout Plain Layout
-R Repository Activity, with point size demonstrating relative fork count.
+R Repository Activity, with point size demonstrating relative watcher count,
+ for those projects with at least 100 watchers.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:R-Repository-Social-Activity"
@@ -2700,55 +2729,79 @@ name "fig:R-Repository-Social-Activity"
 \end_layout
 
 \begin_layout Section
-Summary and Future Research
+Summary
 \end_layout
 
 \begin_layout Standard
-Package and tool developers are leading the R community's continued adoption
- of traditional software engineering practices like version control, unit
- testing, build automation, and continuous integration; with version control
- providing the foundation for the later development stages.
- These tools offer a closed loop, allowing a build automation system to
- detect changes to the underlying code, which can then trigger automated
- testing of new code.
- The GitHub community enhances this infrastructure by connecting developers
- and facilitating collaboration.
- Developers - like those performing reproducible research - utilize and
- benefit from the packages and tools provided by GitHub's R community.
- They realize the benefits of these methods, as is evident by the growth
- in the R community on GitHub.
+The data exposed by the GitHub API provides an indication of overall health
+ of the R community as it exists within the context of GitHub.
+ The growth demonstrated since 2013 suggests that the community of developers
+ utilizing GitHub is on the rise.
+ 
 \end_layout
 
 \begin_layout Standard
-Future research analyzing the 2nd tier repositories (those below the thresholds
- controlling the annotations of our plots), may demonstrate the true diversity
- of the community.
- Identifying and cataloging the domains in which these repositories lie
- would help other developers and researchers take full advantage of this
- work.
- Promotion of the associated projects will help ensure that developers continue
- to contribute to the growth of the community.
- Identification of the domains present within the GitHub R space could be
- achieved by scanning the associated R source code.
- Libraries utilized in these projects may provide an indication of the associate
-d domain.
+Some of the most popular R projects found on GitHub - as highlighted in
+ the provided visualizations - are those that help researchers communicate
+ their efforts.
+ Packages like 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{ggplot2}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{knitr}
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pkg{devtools}
+\end_layout
+
+\end_inset
+
+ address the cross-cutting concerns that many researchers face: specifically,
+ visualization, publication, and deployment.
+ GitHub itself is just another contributing tool.
 \end_layout
 
 \begin_layout Standard
-Continuous monitoring of the key performance metrics of the community will
- help demonstrate the continued adoption of R as a tool for these various
- domains.
- The metrics shown change on a regular basis as new projects appear and
- grow in influence.
- In addition to the monitoring of projects, as we have demonstrated here,
- GitHub provides facilities to follow the key developers within the R landscape
- and provides us with an opportunity to examine the continued growth and
- development of this community.
+It is clear that GitHub is a positive influence for the R community.
+ The increasing number of GitHub projects dedicated to teaching the language
+ reinforce this point.
+ 
 \end_layout
 
 \begin_layout Standard
-Talk about GitHub historian services that actively monitor trends in language
- utilization.
+Further monitoring of the community's key performance metrics will help
+ illustrate subsequent adoption of both R and GitHub as tools for the specific
+ research domains just beneath the surface of our visualizations.
+ Eventually, the adoption will begin to fade in some respect, signifying
+ either the transition to a new preferred language, or simply to GitHub's
+ successor.
 \end_layout
 
 \begin_layout Section
