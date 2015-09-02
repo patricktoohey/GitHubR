@@ -2733,10 +2733,10 @@ Summary
 \end_layout
 
 \begin_layout Standard
-The data exposed by the GitHub API provides an indication of overall health
- of the R community as it exists within the context of GitHub.
- The growth demonstrated since 2013 suggests that the community of developers
- utilizing GitHub is on the rise.
+The data exposed by the GitHub API helps illustrate the overall health of
+ the R community hosted inside GitHub.
+ The growth demonstrated since 2013 suggests increased involvement from
+ the community of developers that utilize GitHub's facilities.
  
 \end_layout
 
@@ -2783,25 +2783,21 @@ pkg{devtools}
 
 \end_inset
 
- address the cross-cutting concerns that many researchers face: specifically,
+ address cross-cutting concerns that many researchers face: specifically,
  visualization, publication, and deployment.
  GitHub itself is just another contributing tool.
-\end_layout
-
-\begin_layout Standard
-It is clear that GitHub is a positive influence for the R community.
- The increasing number of GitHub projects dedicated to teaching the language
- reinforce this point.
+ Moreover, given the increasing number of GitHub projects dedicated to teaching
+ the language, it is clear that GitHub contibutes to the community in a
+ variety of ways.
  
 \end_layout
 
 \begin_layout Standard
 Further monitoring of the community's key performance metrics will help
- illustrate subsequent adoption of both R and GitHub as tools for the specific
- research domains just beneath the surface of our visualizations.
- Eventually, the adoption will begin to fade in some respect, signifying
- either the transition to a new preferred language, or simply to GitHub's
- successor.
+ illustrate subsequent adoption of both R and GitHub as tools for the research
+ domains lying beneath the surface of our visualizations.
+ Eventually, the rate of adoption will begin to fade, signifying either
+ the transition to a new preferred language or, possibly, to GitHub's successor.
 \end_layout
 
 \begin_layout Section
