@@ -216,7 +216,7 @@ status open
 The search query for R repositories returns a maximum of 1,000 rows and
  has been found to include projects from other languages that use the .r
  file extension.
- Accordingly, it is difficult to precisely quantifying the number of R projects
+ Accordingly, it is difficult to precisely quantify the number of R projects
  on GitHub.
 \end_layout
 
